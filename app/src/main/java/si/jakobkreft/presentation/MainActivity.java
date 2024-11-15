@@ -3,6 +3,7 @@ package si.jakobkreft.presentation;
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static androidx.core.content.ContextCompat.getSystemService;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        ImageButton aboutButton = findViewById(R.id.AboutButton);
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
+            }
+        });
         // Initialize UI elements
         timeInput = findViewById(R.id.timeInput);
         yellowTimeInput = findViewById(R.id.yellowTime);
@@ -227,9 +236,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String formatTime(long millis) {
-        int minutes = (int) (millis / 1000) / 60;
+        int hours = (int) (millis / 1000) / 3600;
+        int minutes = (int) ((millis / 1000) % 3600) / 60;
         int seconds = (int) (millis / 1000) % 60;
-        return String.format("%02d:%02d", minutes, seconds);
+
+        if (hours > 0) {
+            return String.format("%d:%02d:%02d", hours, minutes, seconds);
+        } else if (minutes > 0) {
+            return String.format("%d:%02d", minutes, seconds);
+        } else {
+            return String.format("%d", seconds);
+        }
     }
 
 
@@ -265,15 +282,19 @@ public class MainActivity extends AppCompatActivity {
 
     private long parseTimeInput(String timeStr) {
         try {
+            int hours = 0, minutes = 0, seconds = 0;
             String[] parts = timeStr.split(":");
-            if (parts.length == 2) {
-                int minutes = Integer.parseInt(parts[0]);
-                int seconds = Integer.parseInt(parts[1]);
-                return (minutes * 60 + seconds) * 1000;
-            } else {
-                int seconds = Integer.parseInt(timeStr);
-                return seconds * 1000;
+            if (parts.length == 3) {
+                hours = Integer.parseInt(parts[0]);
+                minutes = Integer.parseInt(parts[1]);
+                seconds = Integer.parseInt(parts[2]);
+            } else if (parts.length == 2) {
+                minutes = Integer.parseInt(parts[0]);
+                seconds = Integer.parseInt(parts[1]);
+            } else if (parts.length == 1) {
+                seconds = Integer.parseInt(parts[0]);
             }
+            return (hours * 3600 + minutes * 60 + seconds) * 1000;
         } catch (NumberFormatException e) {
             return -1; // Invalid input, return -1 to indicate error
         }

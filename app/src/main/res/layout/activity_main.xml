@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#008000"
+    android:contentDescription="main scroll"
     android:padding="20dp"
     android:windowSoftInputMode="adjustPan"
     tools:context=".MainActivity">
@@ -17,31 +18,56 @@
         android:orientation="vertical">
 
         <!-- Title Text -->
-        <TextView
-            android:id="@+id/titleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Presentation Timer"
-            android:textAlignment="center"
-            android:textColor="#66FFFFFF"
-            android:textSize="24sp" />
 
         <!-- Total Time Label -->
-        <TextView
-            android:id="@+id/textView"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="20sp"
-            android:text="Timer for Live Events"
-            android:textColor="#66FFFFFF" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Presentation Timer"
+                android:textAlignment="center"
+                android:textColor="#66FFFFFF"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="20sp"
+                android:text="Timer for Live Events"
+                android:textColor="#66FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+            <ImageButton
+                android:id="@+id/AboutButton"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:layout_gravity="right"
+                android:backgroundTint="#00FFFFFF"
+                android:contentDescription="about"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_info"
+                app:tint="#FFFFFF" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/totalTimeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="Total Time (MM:SS or SS):"
+            android:text="Total Time (HH:MM:SS ):"
             android:textColor="#B3FFFFFF"
             android:textSize="16sp" />
 
@@ -50,7 +76,7 @@
             android:id="@+id/timeInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="0dp"
             android:backgroundTint="#00FFFFFF"
             android:hint="MM:SS or SS"
             android:imeOptions="actionDone"
@@ -66,7 +92,6 @@
             android:id="@+id/yellowWarningLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Orange Warning (Time Remaining):"
             android:textColor="#B3FFFFFF"
             android:textSize="16sp" />
@@ -92,10 +117,9 @@
             android:id="@+id/yellowDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="Time left till end (MM:SS or SS)"
+            android:text="Red Warning (Time Remaining):"
             android:textColor="#B3FFFFFF"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <!-- Red Warning Input -->
 
@@ -115,25 +139,30 @@
             android:textSize="20sp" />
 
 
-
         <!-- Red Warning Description -->
         <TextView
             android:id="@+id/redDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time left till end (MM:SS or SS)"
+            android:fontFamily="@font/archivo_light"
+            android:text="Time left till end"
             android:textColor="#B3FFFFFF"
             android:textSize="14sp" />
 
         <!-- Timer Text -->
         <TextView
             android:id="@+id/timerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00"
+            android:layout_width="343dp"
+            android:layout_height="168dp"
+            android:fontFamily="s"
+            android:text="12:25:19"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="60sp" />
+            app:autoSizeMaxTextSize="100sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform" />
+
 
         <!-- Overtime Text -->
         <TextView
@@ -179,17 +208,6 @@
                 android:src="@drawable/ic_stop"
                 app:tint="#FFFFFF" />
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/AboutButton"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="60dp"
-            android:backgroundTint="#00FFFFFF"
-            android:scaleType="fitCenter"
-            app:tint="#FFFFFF"
-            app:srcCompat="@drawable/ic_info" />
 
         <!-- Footer Text -->
 
