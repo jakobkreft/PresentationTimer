@@ -183,12 +183,13 @@
         <ImageButton
             android:id="@+id/AboutButton"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:layout_gravity="right"
             android:layout_marginTop="60dp"
             android:backgroundTint="#00FFFFFF"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_pause" />
+            app:tint="#FFFFFF"
+            app:srcCompat="@drawable/ic_info" />
 
         <!-- Footer Text -->
 
